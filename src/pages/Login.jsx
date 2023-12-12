@@ -1,18 +1,17 @@
 import axios from "axios";
 import React, { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Context, server } from "../main";
 
 const Login = () => {
-  const { isAuthenticated, setIsAuthenticated} =
-    useContext(Context);
+  const { isAuthenticated, setIsAuthenticated,loading, setLoading} = useContext(Context);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const submitHandler = async (e) => {
+  const navigate = useNavigate();
+  const LoginHandler = async (e) => {
     e.preventDefault();
-    
+    setLoading(true);
     try {
       const { data } = await axios.post(
         `${server}/user/login`,
@@ -30,20 +29,20 @@ const Login = () => {
 
       toast.success(data.message);
       setIsAuthenticated(true);
-      
+      setLoading(false);
+      navigate("/home");
     } catch (error) {
       toast.error(error.response.data.message);
-      
       setIsAuthenticated(false);
+      setLoading(false);
     }
   };
 
-  if (isAuthenticated) return <Navigate to={"/"} />;
 
   return (
     <div className="login">
       <section>
-        <form onSubmit={submitHandler}>
+        <form onSubmit={LoginHandler}>
           <input
             type="email"
             placeholder="Email"
@@ -58,7 +57,7 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button type="submit">
+          <button disabled={loading} type="submit">
             Login
           </button>
           <h4>Or</h4>
