@@ -104,7 +104,7 @@ function Home() {
       </div>
       <section className="todosContainer">
         {loading ? (
-          <PulseLoader color="#36d7b7" loading={loading} size={150} />
+          <PulseLoader color="#D0D4CA" loading={loading} size={50} />
         ) : (
           tasks.map((task) => (
             <div key={task._id}>
