@@ -17,7 +17,7 @@ function Home() {
   const navigate = useNavigate();
   
   const updateHandler = async (id) => {
-    setLoading(true);
+    
     try {
        setTasks((prevTasks) =>
          prevTasks.map((task) =>
@@ -29,10 +29,10 @@ function Home() {
       });
       toast.success(data.message)
       setRefresh((prev) => !prev);
-      setLoading(false);
+      
     } catch (error) {
       toast.error(error.response.data.message);
-      setLoading(false);
+      
     }
   }
   const deleteHandler = async (id) => { 
