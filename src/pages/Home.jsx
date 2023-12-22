@@ -13,13 +13,30 @@ function Home() {
   const [loading, setLoading] = useState(false);
   const [tasks, setTasks] = useState([]);
   const { isAuthenticated, setIsAuthenticated } = useContext(Context);
+  const [refresh, setRefresh] = useState(false);
   const navigate = useNavigate();
   
-  const updateHandler = (id) => {
-    toast.success(id);
+  const updateHandler = async (id) => {
+    try {
+      const { data } = await axios.put(`${server}/task/${id}`, {}, {
+        withCredentials: true
+      });
+      toast.success(data.message)
+      setRefresh((prev) => !prev);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
   }
-  const deleteHandler = (id) => { 
-    toast.error(id);  
+  const deleteHandler = async (id) => { 
+    try {
+      const { data } = await axios.delete(`${server}/task/${id}`, {
+        withCredentials: true
+      });
+      toast.success(data.message)
+      setRefresh((prev) => !prev);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    } 
   }
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -39,6 +56,7 @@ function Home() {
       setDescription("");
       toast.success(data.message);
       setLoading(false);
+      setRefresh((prev) => !prev);
     } catch (error) {
       toast.error(error.response.data.message);
       setLoading(false);
@@ -53,7 +71,8 @@ function Home() {
     }).catch((error) => { 
       toast.error(error.response.data.message);
     })  
-  },[])
+  }, [refresh])
+  if(!isAuthenticated) return navigate("/");
   return (
     <div className="container">
       <div className="login">
