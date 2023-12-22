@@ -61,9 +61,10 @@ function Home() {
       setTitle("");
       setDescription("");
       toast.success(data.message);
-     
+      setLoading(false);
       setRefresh((prev) => !prev);
     } catch (error) {
+      setLoading(false);
       toast.error(error.response.data.message);
     
     }
@@ -104,7 +105,7 @@ function Home() {
       </div>
       <section className="todosContainer">
         {loading ? (
-          <PulseLoader color="#D0D4CA" loading={loading} size={51} />
+          <PulseLoader color="#D0D4CA" loading={loading} size={40} />
         ) : (
           tasks.map((task) => (
             <div key={task._id}>
