@@ -89,6 +89,9 @@ $shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         cursor: not-allowed;
     }
 }
+@mixin todoItem {
+    padding: 5px;
+}
 @mixin hidescrollbar {
     &::-webkit-scrollbar {
         display: none;

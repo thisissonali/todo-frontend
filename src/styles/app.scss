@@ -43,7 +43,8 @@ a {
 .todo {
     background-color: $color2;
     border-radius: 5px;
-
+    
+    
     @include flexBox(row, center, space-between);
     width: 500px;
     padding: 2rem;
@@ -56,8 +57,11 @@ a {
         width: 2rem;
         height: 2rem;
     }
-}
 
+}
+.todoItems{
+    @include todoItem;
+}
 .loader {
     @include defaultStyle;
     @include flexBox(column, center, center);
