@@ -19,6 +19,11 @@ function Home() {
   const updateHandler = async (id) => {
     setLoading(true);
     try {
+       setTasks((prevTasks) =>
+         prevTasks.map((task) =>
+           task._id === id ? { ...task, isCompleted: !task.isCompleted } : task
+         )
+       );
       const { data } = await axios.put(`${server}/task/${id}`, {}, {
         withCredentials: true
       });
@@ -33,6 +38,8 @@ function Home() {
   const deleteHandler = async (id) => { 
     setLoading(true);
     try {
+      setTasks((prevTasks) => prevTasks.filter((task) => task._id !== id));
+
       const { data } = await axios.delete(`${server}/task/${id}`, {
         withCredentials: true
       });
