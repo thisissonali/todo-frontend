@@ -41,10 +41,10 @@ const Login = () => {
 
   return (
     <div className="login">
-      <section>
-        {loading ? (
-          <ClipLoader size={20} color="#B7C2C0" loading={loading} />
-        ) : (
+      {loading ? (
+        <ClipLoader size={100} color="#B7C2C0" loading={loading} />
+      ) : (
+        <section>
           <form onSubmit={LoginHandler}>
             <input
               type="email"
@@ -66,8 +66,8 @@ const Login = () => {
             <h4>Or</h4>
             <Link to="/register">Sign Up</Link>
           </form>
-        )}
-      </section>
+        </section>
+      )}
     </div>
   );
 };
