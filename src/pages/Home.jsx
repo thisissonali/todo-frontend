@@ -36,8 +36,7 @@ function Home() {
     }
   }
   const deleteHandler = async (id) => { 
-    setLoading(true);
-    try {
+   try {
       setTasks((prevTasks) => prevTasks.filter((task) => task._id !== id));
 
       const { data } = await axios.delete(`${server}/task/${id}`, {
@@ -45,36 +44,62 @@ function Home() {
       });
       toast.success(data.message)
       setRefresh((prev) => !prev);
-      setLoading(false);
+      
     } catch (error) {
       toast.error(error.response.data.message);
-      setLoading(false);
+     
     } 
   }
   const submitHandler = async (event) => {
     event.preventDefault();
+   try {
+     // Optimistically update local state
+     setTasks((prevTasks) => [
+       ...prevTasks,
+       {
+         _id: Date.now(), // Assign a temporary ID until the actual ID is received from the server
+         title,
+         description,
+         isCompleted: false, // Assuming the new task is not completed initially
+       },
+     ]);
+
+     const { data } = await axios.post(
+       `${server}/task/new`,
+       {
+         title,
+         description,
+       },
+       {
+         withCredentials: true,
+         headers: {
+           "Content-Type": "application/json",
+         },
+       }
+     );
+
+     // Update the local state with the actual data from the server
+     setTasks((prevTasks) =>
+       prevTasks.map((task) =>
+         task._id === Date.now() ? { ...task, _id: data.task._id } : task
+       )
+     );
+
+     setTitle("");
+     setDescription("");
+     toast.success(data.message);
     
-    try {
-      setLoading(true);
-      const { data } = await axios.post(`${server}/task/new`, {
-        title,
-        description,
-      }, {
-        withCredentials: true,
-        headers: {
-          "Content-Type":"application/json"
-        }
-      });
-      setTitle("");
-      setDescription("");
-      toast.success(data.message);
-      setLoading(false);
-      setRefresh((prev) => !prev);
-    } catch (error) {
-      setLoading(false);
-      toast.error(error.response.data.message);
-    
-    }
+   } catch (error) {
+     // Handle the error, e.g., show a notification
+     toast.error(error.response.data.message);
+
+     // Revert the optimistic update in case of an error
+     setTasks((prevTasks) =>
+       prevTasks.filter((task) => task._id !== Date.now())
+     );
+
+     
+   }
   }
   useEffect(() => {
     axios.get(`${server}/task/my`, {
