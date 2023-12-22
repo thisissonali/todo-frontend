@@ -68,7 +68,27 @@ $shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         cursor: not-allowed;
     }
 }
+@mixin logoutbutton($w: 10rem, $p: 0.5rem, $bgColor: $color3, $color: $color2) {
+    width: $w;
+    padding: calc($p * 1) calc($p * 3);
+    background-color: $bgColor;
+    border: 1px solid $bgColor;
+    color: $color;
+    text-transform: uppercase;
+    border: 2px solid #e7e7e7;
+    transition: all 0.3s;
+    cursor: pointer;
 
+    &:hover {
+        background-color: $color;
+        color: $bgColor;
+    }
+
+    &:disabled {
+        opacity: 0.2;
+        cursor: not-allowed;
+    }
+}
 @mixin hidescrollbar {
     &::-webkit-scrollbar {
         display: none;

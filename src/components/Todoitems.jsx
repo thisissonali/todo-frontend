@@ -4,7 +4,7 @@ const Todoitems = ({title , description , isCompleted , updateHandler , deleteHa
   return (
     <div className="todo">
       <div>
-        <h4>{title}</h4>
+        <h2>{title}</h2>
         <p>{description}</p>
       </div>
       <div>

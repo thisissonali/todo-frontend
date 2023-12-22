@@ -37,7 +37,7 @@ a {
 .todosContainer {
     @include flexBox(column, center, flex-start);
     @include fill;
-    @include container(900px, unset, 3rem 0);
+    @include container(500px, unset, 3rem 0);
 }
 
 .todo {
@@ -45,7 +45,7 @@ a {
     border-radius: 5px;
 
     @include flexBox(row, center, space-between);
-    width: 900px;
+    width: 500px;
     padding: 2rem;
 
     >div:last-of-type {
@@ -70,7 +70,10 @@ a {
     @include styledText;
     @include myButton;
 }
-
+.logoutbtn {
+    @include styledText;
+    @include logoutbutton;
+}
 .container {
     @include defaultStyle;
     padding: 5rem 2rem;

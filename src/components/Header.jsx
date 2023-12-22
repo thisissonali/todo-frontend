@@ -29,7 +29,7 @@ function Header() {
       </div>
       <article>
        {isAuthenticated && (
-          <button disabled={loading} onClick={logoutHandler} className="btn">
+          <button disabled={loading} onClick={logoutHandler} className="logoutbtn">
             Logout
           </button>
         )}
