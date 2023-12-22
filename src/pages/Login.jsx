@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { Context, server } from "../main";
-
+import { ClipLoader } from "react-spinners";
 const Login = () => {
   const { isAuthenticated, setIsAuthenticated,loading, setLoading} = useContext(Context);
   const [email, setEmail] = useState("");
@@ -58,7 +58,11 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <button disabled={loading} type="submit">
-            Login
+            {loading ? (
+              <ClipLoader size={20} color="#B7C2C0" loading={loading} />
+            ) : (
+              "Login"
+            )}
           </button>
           <h4>Or</h4>
           <Link to="/register">Sign Up</Link>

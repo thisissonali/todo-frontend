@@ -53,14 +53,13 @@ function Home() {
   const submitHandler = async (event) => {
     event.preventDefault();
    try {
-     // Optimistically update local state
      setTasks((prevTasks) => [
        ...prevTasks,
        {
-         _id: Date.now(), // Assign a temporary ID until the actual ID is received from the server
+         _id: Date.now(),
          title,
          description,
-         isCompleted: false, // Assuming the new task is not completed initially
+         isCompleted: false, 
        },
      ]);
 
@@ -78,7 +77,6 @@ function Home() {
        }
      );
 
-     // Update the local state with the actual data from the server
      setTasks((prevTasks) =>
        prevTasks.map((task) =>
          task._id === Date.now() ? { ...task, _id: data.task._id } : task
@@ -90,11 +88,9 @@ function Home() {
      toast.success(data.message);
     
    } catch (error) {
-     // Handle the error, e.g., show a notification
-     toast.error(error.response.data.message);
+      toast.error(error.response.data.message);
 
-     // Revert the optimistic update in case of an error
-     setTasks((prevTasks) =>
+    setTasks((prevTasks) =>
        prevTasks.filter((task) => task._id !== Date.now())
      );
 
