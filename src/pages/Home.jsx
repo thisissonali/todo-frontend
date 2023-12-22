@@ -6,7 +6,7 @@ import Todoitems from '../components/Todoitems';
 import { Context } from '../main';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import ClipLoader from "react-spinners/ClipLoader";
 function Home() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -17,25 +17,31 @@ function Home() {
   const navigate = useNavigate();
   
   const updateHandler = async (id) => {
+    setLoading(true);
     try {
       const { data } = await axios.put(`${server}/task/${id}`, {}, {
         withCredentials: true
       });
       toast.success(data.message)
       setRefresh((prev) => !prev);
+      setLoading(false);
     } catch (error) {
       toast.error(error.response.data.message);
+      setLoading(false);
     }
   }
   const deleteHandler = async (id) => { 
+    setLoading(true);
     try {
       const { data } = await axios.delete(`${server}/task/${id}`, {
         withCredentials: true
       });
       toast.success(data.message)
       setRefresh((prev) => !prev);
+      setLoading(false);
     } catch (error) {
       toast.error(error.response.data.message);
+      setLoading(false);
     } 
   }
   const submitHandler = async (event) => {
@@ -55,11 +61,11 @@ function Home() {
       setTitle("");
       setDescription("");
       toast.success(data.message);
-      setLoading(false);
+     
       setRefresh((prev) => !prev);
     } catch (error) {
       toast.error(error.response.data.message);
-      setLoading(false);
+    
     }
   }
   useEffect(() => {
@@ -97,11 +103,21 @@ function Home() {
         </section>
       </div>
       <section className="todosContainer">
-        {tasks.map((task) => (
+        {
+          loading ? <ClipLoader
+          color={color}
+          loading={loading}
+          cssOverride={override}
+          size={150}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+      /> :  
+          tasks.map((task) => (
           <div key={task._id}>
             <Todoitems title={task.title} description={task.description} isCompleted={task.isCompleted} updateHandler={updateHandler} deleteHandler={deleteHandler} id={ task._id}  />
           </div>
-        ))}
+          ))
+        }
       </section>
     </div>
   );

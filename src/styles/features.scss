@@ -90,7 +90,7 @@ $shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     }
 }
 @mixin todoItem {
-    padding: 5px;
+    padding-bottom: 7px;
 }
 @mixin hidescrollbar {
     &::-webkit-scrollbar {
