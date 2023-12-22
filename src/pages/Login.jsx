@@ -42,7 +42,16 @@ const Login = () => {
   return (
     <div className="login">
       {loading ? (
-        <ClipLoader size={100} color="#B7C2C0" loading={loading} />
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100vh",
+          }}
+        >
+          <ClipLoader size={300} color="#B7C2C0" loading={loading} />
+        </div>
       ) : (
         <section>
           <form onSubmit={LoginHandler}>
