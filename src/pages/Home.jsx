@@ -103,19 +103,22 @@ function Home() {
         </section>
       </div>
       <section className="todosContainer">
-        {
-          loading ? <PulseLoader
-          color={"#36d7b7"}
-          loading={loading}
-          size={150}
-          
-      /> :  
+        {loading ? (
+          <PulseLoader color="#36d7b7" loading={loading} size={150} />
+        ) : (
           tasks.map((task) => (
-          <div key={task._id}>
-            <Todoitems title={task.title} description={task.description} isCompleted={task.isCompleted} updateHandler={updateHandler} deleteHandler={deleteHandler} id={ task._id}  />
-          </div>
+            <div key={task._id}>
+              <Todoitems
+                title={task.title}
+                description={task.description}
+                isCompleted={task.isCompleted}
+                updateHandler={updateHandler}
+                deleteHandler={deleteHandler}
+                id={task._id}
+              />
+            </div>
           ))
-        }
+        )}
       </section>
     </div>
   );
