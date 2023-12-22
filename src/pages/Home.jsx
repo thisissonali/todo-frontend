@@ -6,7 +6,7 @@ import Todoitems from '../components/Todoitems';
 import { Context } from '../main';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ClipLoader from "react-spinners/ClipLoader";
+import { PulseLoader } from 'react-spinners';
 function Home() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -104,13 +104,11 @@ function Home() {
       </div>
       <section className="todosContainer">
         {
-          loading ? <ClipLoader
-          color={color}
+          loading ? <PulseLoader
+          color={"#36d7b7"}
           loading={loading}
-          cssOverride={override}
           size={150}
-          aria-label="Loading Spinner"
-          data-testid="loader"
+          
       /> :  
           tasks.map((task) => (
           <div key={task._id}>
