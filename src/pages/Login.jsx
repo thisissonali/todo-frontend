@@ -42,31 +42,31 @@ const Login = () => {
   return (
     <div className="login">
       <section>
-        <form onSubmit={LoginHandler}>
-          <input
-            type="email"
-            placeholder="Email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            required
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button disabled={loading} type="submit">
-            {loading ? (
-              <ClipLoader size={20} color="#B7C2C0" loading={loading} />
-            ) : (
-              "Login"
-            )}
-          </button>
-          <h4>Or</h4>
-          <Link to="/register">Sign Up</Link>
-        </form>
+        {loading ? (
+          <ClipLoader size={20} color="#B7C2C0" loading={loading} />
+        ) : (
+          <form onSubmit={LoginHandler}>
+            <input
+              type="email"
+              placeholder="Email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              type="password"
+              required
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <button disabled={loading} type="submit">
+              Login
+            </button>
+            <h4>Or</h4>
+            <Link to="/register">Sign Up</Link>
+          </form>
+        )}
       </section>
     </div>
   );
