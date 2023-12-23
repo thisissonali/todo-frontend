@@ -50,7 +50,7 @@ const Login = () => {
             height: "100vh",
           }}
         >
-          <ClipLoader color="#B7C2C0" loading={loading} />
+          <ClipLoader size= { 200 } color="#B7C2C0" loading={loading} />
         </div>
       ) : (
         <section>

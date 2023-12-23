@@ -1,15 +1,15 @@
-.login>section {
-    @include container(500px, unset, 2rem);
-    min-height: 80%;
-    background-color: $color2;
-    margin-top: 30px;
-    >form {
-        @include flexBox(column, center, flex-start, 2rem);
-        @include inputs;
+// .login>section {
+//     @include container(500px, unset, 2rem);
+//     min-height: 80%;
+//     background-color: $color2;
+//     margin-top: 30px;
+//     >form {
+//         @include flexBox(column, center, flex-start, 2rem);
+//         @include inputs;
 
-        button {
-            @include styledText(0.9rem);
-            @include myButton(15.75rem, 1rem);
-        }
-    }
-}
+//         button {
+//             @include styledText(0.9rem);
+//             @include myButton(15.75rem, 1rem);
+//         }
+//     }
+// }
