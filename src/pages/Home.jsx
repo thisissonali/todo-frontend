@@ -106,12 +106,13 @@ function Home() {
       console.log(response.data.taskOfUser);
     }).catch((error) => { 
       toast.error(error.response.data.message);
+      navigate("/");
     })  
   }, [refresh])
   if(!isAuthenticated) return navigate("/");
   return (
     <div className="container">
-      <div className='todo-form'>
+      <div className="todo-form">
         <section>
           <form onSubmit={submitHandler}>
             <input
@@ -133,28 +134,26 @@ function Home() {
         </section>
       </div>
       <div>
-      <section>
-        {loading ? (
-          <PulseLoader color="#D0D4CA" loading={loading} size={40} />
-        ) : (
-          <div className='todo-cont'>
-           {
-            tasks.map((task) => (
-            <div key={task._id} className="todo-item">
-              <Todoitems
-                title={task.title}
-                description={task.description}
-                isCompleted={task.isCompleted}
-                updateHandler={updateHandler}
-                deleteHandler={deleteHandler}
-                id={task._id}
-              />
+        <section>
+          {loading ? (
+            <PulseLoader color="#D0D4CA" loading={loading} size={40} />
+          ) : (
+            <div className="todo-cont">
+              {tasks.map((task) => (
+                <div key={task._id}>
+                  <Todoitems
+                    title={task.title}
+                    description={task.description}
+                    isCompleted={task.isCompleted}
+                    updateHandler={updateHandler}
+                    deleteHandler={deleteHandler}
+                    id={task._id}
+                  />
+                </div>
+              ))}
             </div>
-            ))
-            }
-          </div>
-        )}
-      </section>
+          )}
+        </section>
       </div>
     </div>
   );
