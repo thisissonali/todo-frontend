@@ -57,15 +57,16 @@ input{
 .todo{
     display: flex;
     justify-content: space-between;
+    width: 35%;
 }
 .updt{
-    display: flex;
+  display: flex;
 }
 .delete-btn{
     height: 3rem;
 }
 .todo-item{
-    width: 30%;
+    width: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
