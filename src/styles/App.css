@@ -80,6 +80,9 @@ input{
     align-items: center;
     justify-content: center;
 }
+.todo-form{
+    width: 55%;
+}
 .todo-cont{
     display: flex;
     flex-direction: column;
@@ -94,79 +97,3 @@ input{
         width: 75%;
     }
 }
-/* 
- @import "features";
- @import "header";
- @import "login";
- @import "mediaquery";
-
- a {
-     text-decoration: none;
-     color: $color3;
- }
- .header{
-     padding: 20px;
- }
- .home {
-     text-align: center;
-
-     .heading {
-         @include styledText(2rem, 100, uppercase);
-         padding-top: 10vmax;
-     }
-
-     p {
-         margin: 2rem 0;
-         font-weight: 900;
-     }
- }
-
- .todosContainer {
-     @include flexBox(column, center, flex-start);
-     @include fill;
-     @include container(500px, unset, 3rem 0);
- }
-
- .todo {
-     background-color: $color2;
-     border-radius: 5px;
-
-
-     @include flexBox(row, center, space-between);
-     width: 500px;
-     padding: 2rem;
-
-     >div:last-of-type {
-         @include flexBox(row);
-     }
-
-     input {
-         width: 2rem;
-         height: 2rem;
-     }
-
- }
- .todoItems{
-     @include todoItem;
- }
- .loader {
-     @include defaultStyle;
-     @include flexBox(column, center, center);
-     @include styledText(2rem, 100, uppercase);
-     overflow-x: hidden;
-     width: 100vw;
- }
-
- .btn {
-     @include styledText;
-     @include myButton;
- }
- .logoutbtn {
-     @include styledText;
-     @include logoutbutton;
- }
- .container {
-     @include defaultStyle;
-     padding: 5rem 2rem;
-     background-color: $color4;
- }  */

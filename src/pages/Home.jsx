@@ -52,18 +52,19 @@ function Home() {
   }
   const submitHandler = async (event) => {
     event.preventDefault();
-   try {
+    try {
+     let tempId = Date.now();
      setTasks((prevTasks) => [
        ...prevTasks,
        {
-         _id: Date.now(),
+         _id: tempId,
          title,
          description,
          isCompleted: false, 
        },
      ]);
 
-     const { data } = await axios.post(
+     const  { data } = await axios.post(
        `${server}/task/new`,
        {
          title,
@@ -76,13 +77,13 @@ function Home() {
          },
        }
      );
-
+      // console.log(data);
+      // console.log(data.data._id);
      setTasks((prevTasks) =>
        prevTasks.map((task) =>
-         task._id === Date.now() ? { ...task, _id: data.task._id } : task
+         task._id === tempId ? { ...task, _id: data.data._id } : task
        )
      );
-
      setTitle("");
      setDescription("");
      toast.success(data.message);
@@ -110,7 +111,7 @@ function Home() {
   if(!isAuthenticated) return navigate("/");
   return (
     <div className="container">
-      <div>
+      <div className='todo-form'>
         <section>
           <form onSubmit={submitHandler}>
             <input
