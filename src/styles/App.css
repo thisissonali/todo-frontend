@@ -8,9 +8,28 @@
 }
 nav{
     display: flex;
-    padding:15px;
+    padding:25px;
     justify-content: space-between;
     background-color: rgb(51, 51, 51);
+    color: #e7e7e7;
+}
+button{
+    width: 10rem;
+    padding: 0.5rem 1.5rem;
+    background-color: rgb(51, 51, 51);
+    border: 1px solid rgb(51, 51, 51);
+    color:#e7e7e7;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+button:hover{
+    background-color: #e7e7e7;
+    color:rgb(51, 51, 51);
+}
+button:disabled{
+    opacity: 0.2;
+    cursor: not-allowed;
 }
 /* 
  @import "features";
