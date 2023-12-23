@@ -125,18 +125,20 @@ function Home() {
               onChange={(event) => setDescription(event.target.value)}
               placeholder="Description"
             />
-            <button type="submit" disabled={loading} className='login-btn'>
+            <button type="submit" disabled={loading} className="login-btn">
               ADD TASK
             </button>
           </form>
         </section>
       </div>
-      <section className="todosContainer">
+      <section>
         {loading ? (
           <PulseLoader color="#D0D4CA" loading={loading} size={40} />
         ) : (
-          tasks.map((task) => (
-            <div key={task._id} className='todo-item'>
+          <div className='todo-cont'>
+           {
+            tasks.map((task) => (
+            <div key={task._id} className="todo-item">
               <Todoitems
                 title={task.title}
                 description={task.description}
@@ -146,7 +148,9 @@ function Home() {
                 id={task._id}
               />
             </div>
-          ))
+            ))
+            }
+          </div>
         )}
       </section>
     </div>
