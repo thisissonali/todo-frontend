@@ -125,7 +125,7 @@ function Home() {
               onChange={(event) => setDescription(event.target.value)}
               placeholder="Description"
             />
-            <button type="submit" disabled={loading}>
+            <button type="submit" disabled={loading} className='login-btn'>
               ADD TASK
             </button>
           </form>

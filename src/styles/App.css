@@ -54,7 +54,9 @@ input{
     text-decoration: none;
     margin-top: 15px;
 }
-
+.todo{
+    display: flex;
+}
 
 
 /* For mobile*/
