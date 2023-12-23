@@ -57,8 +57,17 @@ input{
 .todo{
     display: flex;
 }
-
-
+.updt{
+    display: flex;
+}
+.delete-btn{
+    height: 5rem;
+}
+.todo-item{
+    width: 30%;
+    margin-left: 15px;
+    display: flex;
+}
 /* For mobile*/
 @media screen and (max-width: 700px) {
     input{

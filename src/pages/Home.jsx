@@ -136,7 +136,7 @@ function Home() {
           <PulseLoader color="#D0D4CA" loading={loading} size={40} />
         ) : (
           tasks.map((task) => (
-            <div key={task._id}>
+            <div key={task._id} className='todo-item'>
               <Todoitems
                 title={task.title}
                 description={task.description}
