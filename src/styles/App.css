@@ -31,6 +31,19 @@ button:disabled{
     opacity: 0.2;
     cursor: not-allowed;
 }
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+input{
+    width: 25%;
+    height: 50px;
+    margin-top:40px;
+    padding: 5px;
+}
 /* 
  @import "features";
  @import "header";
