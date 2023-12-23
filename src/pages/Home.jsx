@@ -110,7 +110,7 @@ function Home() {
   if(!isAuthenticated) return navigate("/");
   return (
     <div className="container">
-      <div className="login">
+      <div>
         <section>
           <form onSubmit={submitHandler}>
             <input
@@ -131,6 +131,7 @@ function Home() {
           </form>
         </section>
       </div>
+      <div>
       <section>
         {loading ? (
           <PulseLoader color="#D0D4CA" loading={loading} size={40} />
@@ -153,6 +154,7 @@ function Home() {
           </div>
         )}
       </section>
+      </div>
     </div>
   );
 }
