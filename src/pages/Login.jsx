@@ -69,11 +69,11 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <button disabled={loading} type="submit">
+            <button className="login-btn" disabled={loading} type="submit">
               Login
             </button>
             <h4>Or</h4>
-            <Link to="/register">Sign Up</Link>
+            <Link to="/register" className="signUp-btn">Sign Up</Link>
           </form>
         </section>
       )}
