@@ -6,7 +6,7 @@ import Todoitems from '../components/Todoitems';
 import { Context } from '../main';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { PulseLoader } from 'react-spinners';
+import { ColorRing } from 'react-loader-spinner';
 function Home() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -133,10 +133,18 @@ function Home() {
           </form>
         </section>
       </div>
-      <div>
+      <div className="todo-items">
         <section>
           {loading ? (
-            <PulseLoader color="#D0D4CA" loading={loading} size={40} />
+            <ColorRing
+              visible={true}
+              height="250"
+              width="250"
+              ariaLabel="color-ring-loading"
+              wrapperStyle={{}}
+              wrapperClass="color-ring-wrapper"
+              colors={["#F0F0F0", "#F0F0F0", "#F0F0F0", "#F0F0F0", "#F0F0F0"]}
+            />
           ) : (
             <div className="todo-cont">
               {tasks.map((task) => (

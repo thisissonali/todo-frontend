@@ -3,12 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Context, server } from "../main";
 import toast from "react-hot-toast";
-
+import { ColorRing } from "react-loader-spinner";
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { isAuthenticated, setIsAuthenticated, loading,setLoading} = useContext(Context);
+  const {loading,setLoading} = useContext(Context);
   const navigate = useNavigate();
   const RegisterHandler = async (e) => {
     e.preventDefault();
@@ -41,38 +41,61 @@ const Register = () => {
 
   return (
     <div className="login">
-      <section>
-        <form onSubmit={RegisterHandler}>
-          <input
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            type="text"
-            placeholder="Name"
-            required
+      {loading ? (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100vh",
+          }}
+          className="loader-style"
+        >
+          <ColorRing
+            visible={true}
+            height="250"
+            width="250"
+            ariaLabel="color-ring-loading"
+            wrapperStyle={{}}
+            wrapperClass="color-ring-wrapper"
+            colors={["#F0F0F0", "#F0F0F0", "#F0F0F0", "#F0F0F0", "#F0F0F0"]}
+            
           />
-          <input
-            type="email"
-            placeholder="Email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            required
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button disabled={loading} type="submit" className="login-btn">
-            Sign Up
-          </button>
-          <h4>Or</h4>
-          <Link to="/" className="signUp-btn">
-            Log In
-          </Link>
-        </form>
-      </section>
+        </div>
+      ) : (
+        <section>
+          <form onSubmit={RegisterHandler}>
+            <input
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              type="text"
+              placeholder="Name"
+              required
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              type="password"
+              required
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <button disabled={loading} type="submit" className="login-btn">
+              Sign Up
+            </button>
+            <h4>Or</h4>
+            <Link to="/" className="signUp-btn">
+              Log In
+            </Link>
+          </form>
+        </section>
+      )}
     </div>
   );
 };

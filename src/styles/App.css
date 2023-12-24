@@ -72,8 +72,8 @@ input{
   margin-left: 40px;
 }
 .delete-btn{
-    height: 3rem;
-    margin-top: 15px;
+    height: 2.5rem;
+    margin-top: 28px;
 }
 
 .todo-form{
@@ -83,6 +83,10 @@ input{
   display: flex;
   width: 700px;
   justify-content: space-between;
+  border-bottom: 3px groove rgb(115, 115, 115);
+}
+.loader-style{
+    margin-top: -100px;
 }
 .todo-cont{
     display: flex;
@@ -95,7 +99,24 @@ input{
 .toggleCompleted{
    width: 40px;
    margin-right: 15px;
-   margin-top: 15px;
+   margin-top: 23px;
+}
+.temp{
+    margin-top: 23px;
+}
+.todotitle{
+    margin-bottom: 5px;
+}
+.logoutbtn{
+    background-color:  white;
+    color: rgb(51, 51, 51);
+    font-weight: 500;
+    font-size: 15px;
+}
+.logoutbtn:hover{
+    background-color: rgb(51, 51, 51);
+    color: #e7e7e7;
+    border: 1px solid white;
 }
 /* For mobile*/
 @media screen and (max-width: 740px) {
@@ -103,11 +124,11 @@ input{
         width: 75%;
     }
     .todo-item{
-        width: 50px;
+        width: 300px;
+        border-bottom: 3px groove rgb(115, 115, 115);
     }
     .todo-cont{
         width: 50px;
-        margin-left: -150px;
     }
     .delete-btn{
       width: 90px;
@@ -115,5 +136,16 @@ input{
     .todotitle{
      width: 100px;
     }
+}
+@media screen and (max-width: 340px) {
+    .todo-item {
+        width: 50px;
+        border-bottom: 3px groove rgb(115, 115, 115);
+        margin-left: -140px;
+    }
+        .delete-btn {
+            width: 70px;
+            padding-left: 15px;
+        }
 }
 

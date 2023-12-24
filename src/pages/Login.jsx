@@ -4,6 +4,7 @@ import { toast } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { Context, server } from "../main";
 import { ClipLoader } from "react-spinners";
+import { ColorRing } from "react-loader-spinner";
 const Login = () => {
   const { isAuthenticated, setIsAuthenticated,loading, setLoading} = useContext(Context);
   const [email, setEmail] = useState("");
@@ -49,8 +50,18 @@ const Login = () => {
             justifyContent: "center",
             height: "100vh",
           }}
+          className="loader-style"
         >
-          <ClipLoader size= { 200 } color="#B7C2C0" loading={loading} />
+          <ColorRing
+            visible={true}
+            height="250"
+            width="250"
+            ariaLabel="color-ring-loading"
+            wrapperStyle={{}}
+            wrapperClass="color-ring-wrapper"
+            colors={["#F0F0F0", "#F0F0F0", "#F0F0F0", "#F0F0F0", "#F0F0F0"]}
+            
+          />
         </div>
       ) : (
         <section>
@@ -73,7 +84,9 @@ const Login = () => {
               Login
             </button>
             <h4>Or</h4>
-            <Link to="/register" className="signUp-btn">Sign Up</Link>
+            <Link to="/register" className="signUp-btn">
+              Sign Up
+            </Link>
           </form>
         </section>
       )}

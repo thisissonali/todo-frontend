@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-import {Link} from 'react-router-dom'
 import { Context, server } from '../main';
 import axios from 'axios';
 import toast from 'react-hot-toast';
