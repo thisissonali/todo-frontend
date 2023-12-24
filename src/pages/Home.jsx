@@ -104,6 +104,7 @@ function Home() {
     }).then((response) => { 
       setTasks(response.data.taskOfUser);
       console.log(response.data.taskOfUser);
+      setIsAuthenticated(true);
     }).catch((error) => { 
       toast.error(error.response.data.message);
       navigate("/");
