@@ -9,7 +9,7 @@ function Header() {
   const logoutHandler = async () => {
     setLoading(true);
         try {
-            const { data } = await axios.get(`${server}/user/logout`, {
+            const { data } = await axios.get(`/user/logout`, {
                 withCredentials: true,
             });
             toast.success(data.message);

@@ -15,7 +15,7 @@ const Register = () => {
     setLoading(true);
     try {
       const { data } = await axios.post(
-        `${server}/user/register`,
+        `/user/register`,
         {
           name,
           email,

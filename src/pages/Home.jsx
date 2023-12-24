@@ -7,6 +7,7 @@ import { Context } from '../main';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ColorRing } from 'react-loader-spinner';
+
 function Home() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -23,7 +24,7 @@ function Home() {
            task._id === id ? { ...task, isCompleted: !task.isCompleted } : task
          )
        );
-      const { data } = await axios.put(`${server}/task/${id}`, {}, {
+      const { data } = await axios.put(`/task/${id}`, {}, {
         withCredentials: true
       });
       toast.success(data.message)
@@ -58,7 +59,7 @@ function Home() {
    try {
       setTasks((prevTasks) => prevTasks.filter((task) => task._id !== id));
 
-      const { data: { message, success } } = await axios.delete(`${server}/task/${id}`, {
+      const { data: { message, success } } = await axios.delete(`/task/${id}`, {
         withCredentials: true
       });
 
@@ -76,6 +77,7 @@ function Home() {
   }
   const submitHandler = async (event) => {
     event.preventDefault();
+
     try {
      let tempId = Date.now();
      setTasks((prevTasks) => [
@@ -89,7 +91,7 @@ function Home() {
      ]);
 
      const  { data } = await axios.post(
-       `${server}/task/new`,
+       `/task/new`,
        {
          title,
          description,
@@ -124,20 +126,25 @@ function Home() {
   }
 
   useEffect(() => {
-    axios.get(`${server}/task/my`, {
-      withCredentials: true,
-    }).then((response) => { 
-      setTasks(response.data.taskOfUser);
-      console.log(response.data.taskOfUser);
-      setIsAuthenticated(true);
-    }).catch((error) => { 
-      toast.error(error.response.data.message);
-      setIsAuthenticated(false);
-      navigate("/");
-    })  
+    axios
+      .get(`/task/my`, {
+        withCredentials: true,
+      })
+      .then((response) => {
+        setTasks(response.data.taskOfUser);
+        console.log(response.data.taskOfUser);
+        setIsAuthenticated(true);
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message);
+        setIsAuthenticated(false);
+        navigate("/");
+      });
   }, []);
 
-  if(!isAuthenticated) return navigate("/");
+  if(!isAuthenticated) {
+    navigate("/");
+  } 
 
   return (
     <div className="container">

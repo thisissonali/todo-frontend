@@ -1,12 +1,15 @@
 import React, { useState }  from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
+import axios from 'axios';
 import './index.css'
 import { createContext }   from 'react'
 
 
 export const server =
   import.meta.env.VITE_BACKEND_URL || "http://localhost:4000/api/v1";
+
+axios.defaults.baseURL = server;
 
 export const Context = createContext({ isAuthenticated: false });
 
