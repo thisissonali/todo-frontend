@@ -13,7 +13,6 @@ function Home() {
   const [loading, setLoading] = useState(false);
   const [tasks, setTasks] = useState([]);
   const { isAuthenticated, setIsAuthenticated } = useContext(Context);
-  const [refresh, setRefresh] = useState(false);
   const navigate = useNavigate();
   
   const updateHandler = async (id) => {
@@ -28,7 +27,15 @@ function Home() {
         withCredentials: true
       });
       toast.success(data.message)
-      setRefresh((prev) => !prev);
+
+      const updatedTask = data.task;
+
+      setTasks(tasks.map(task => {
+        if(task._id === updatedTask._id) {
+          return updatedTask;
+        }
+        return task;
+      }))
       
     } catch (error) {
       toast.error(error.response.data.message);
@@ -36,18 +43,35 @@ function Home() {
     }
   }
   const deleteHandler = async (id) => { 
+
+    /*
+      const obj = {
+        aditya: {
+          kumar: "surname"
+        }
+      }
+
+      const { aditya: { kumar } } = obj;
+    */
+   const targetTask = tasks.find(task => task._id === id);
+
    try {
       setTasks((prevTasks) => prevTasks.filter((task) => task._id !== id));
 
-      const { data } = await axios.delete(`${server}/task/${id}`, {
+      const { data: { message, success } } = await axios.delete(`${server}/task/${id}`, {
         withCredentials: true
       });
-      toast.success(data.message)
-      setRefresh((prev) => !prev);
-      
+
+      if(success) {
+        toast.success(message);
+      } else {
+        toast.error(message);
+        // insert deleted data back in tasks since task is not deleted at backend
+        setTasks([...tasks, targetTask]);
+      }
+
     } catch (error) {
       toast.error(error.response.data.message);
-     
     } 
   }
   const submitHandler = async (event) => {
@@ -98,6 +122,7 @@ function Home() {
      
    }
   }
+
   useEffect(() => {
     axios.get(`${server}/task/my`, {
       withCredentials: true,
@@ -107,10 +132,13 @@ function Home() {
       setIsAuthenticated(true);
     }).catch((error) => { 
       toast.error(error.response.data.message);
+      setIsAuthenticated(false);
       navigate("/");
     })  
-  }, [refresh])
+  }, []);
+
   if(!isAuthenticated) return navigate("/");
+
   return (
     <div className="container">
       <div className="todo-form">
